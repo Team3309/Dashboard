@@ -3,7 +3,7 @@
 Requires Node v6.x
 
 Install Gulp:
-`npm install -g gulp`
+`npm install -g gulp && npm install -g gulp-cli`
 
 Install required dependencies
 `npm install`
