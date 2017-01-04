@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import {StyleRoot} from 'radium';
 import { connect } from 'react-redux'
 import {Link} from 'react-router'
+import {Tabs, Tab} from 'material-ui/Tabs';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 // import ThemeManager from 'material-ui/lib/styles/theme-manager';
@@ -21,6 +22,7 @@ class App extends Component {
     this.state = {
       navOpen: false,
       navTitle: 'Dashboard',
+      value: 'a',
     }
   };
 
@@ -29,10 +31,36 @@ class App extends Component {
     nextState.inScoutMode = nextProps.location.pathname.indexOf('scout') > -1;
   };
 
+  handleChange = (value) => {
+    this.setState({
+      value: value,
+    });
+  };
+
   render() {
     const childrenWithProps = React.Children.map(this.props.children, (child) => {
       var propsForChild = Object.assign({}, this.props);
-      return React.cloneElement(child, propsForChild);
+      return (  <Tabs
+          value={this.state.value}
+          onChange={this.handleChange}
+        >
+          <Tab label="Drive" value="a" >
+            <div>
+              <h2 style={styles.headline}>Drive</h2>
+              <p>
+                PID IS FUN
+              </p>
+            </div>
+          </Tab>
+          <Tab label="Intake" value="b">
+            <div>
+              <h2 style={styles.headline}>Intake</h2>
+              <p>
+                PID LAWL
+              </p>
+            </div>
+          </Tab>
+        </Tabs>);
     });
 
     return (
