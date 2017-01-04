@@ -3,6 +3,7 @@ import {StyleRoot} from 'radium';
 import { connect } from 'react-redux'
 import {Link} from 'react-router'
 
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 // import ThemeManager from 'material-ui/lib/styles/theme-manager';
 // import ThemeDecorator from 'material-ui/lib/styles/theme-decorator';
 // import CustomTheme from '../theme';
@@ -35,11 +36,13 @@ class App extends Component {
     });
 
     return (
-      <StyleRoot>
-        <div style={{width: '100%', height: '100%'}}>
-          {childrenWithProps}
-        </div>
-      </StyleRoot>
+      <MuiThemeProvider>
+        <StyleRoot>
+          <div style={{width: '100%', height: '100%'}}>
+            {childrenWithProps}
+          </div>
+        </StyleRoot>
+      </MuiThemeProvider>
     );
   }
 }
