@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import {Link} from 'react-router'
 import {Tabs, Tab} from 'material-ui/Tabs'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import PIDTab from "./PIDTab";
+import PIDView from "./PIDView";
 import {initWebSocket} from '../robot'
 
 const styles = {
@@ -47,7 +47,7 @@ class App extends Component {
         >
         {objects.map(function(object){
           return (<Tab label={object} value={object} key={object}>
-            <PIDTab/>
+            <PIDView/>
           </Tab>);
         })}
 

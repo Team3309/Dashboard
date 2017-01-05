@@ -1,5 +1,9 @@
 import React from 'react';
-import {Tabs, Tab} from 'material-ui/Tabs';
+import {Tabs, Tab} from 'material-ui/Tabs'
+import PIDLineChart from "./PIDLineChart"
+import * as d3 from "d3";
+;
+
 
 const styles = {
   headline: {
@@ -10,7 +14,7 @@ const styles = {
   },
 };
 
-export default class PIDTab extends Tab {
+export default class PIDView extends Tab {
   constructor(props) {
     super(props);
     this.state = {
@@ -30,7 +34,7 @@ export default class PIDTab extends Tab {
         <div>
           <h2 style={styles.headline}>Drive</h2>
           <p>
-            PID IS FUN
+            <PIDLineChart/>
           </p>
         </div>
 
