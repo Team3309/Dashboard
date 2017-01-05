@@ -10,8 +10,7 @@ const styles = {
   },
 };
 
-export default class Dash extends React.Component {
-
+export default class PIDTab extends Tab {
   constructor(props) {
     super(props);
     this.state = {
@@ -27,7 +26,14 @@ export default class Dash extends React.Component {
 
   render() {
     return (
-      HELLO
+
+        <div>
+          <h2 style={styles.headline}>Drive</h2>
+          <p>
+            PID IS FUN
+          </p>
+        </div>
+
     );
   }
 }
