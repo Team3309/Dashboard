@@ -5,9 +5,7 @@ import {Link} from 'react-router'
 import {Tabs, Tab} from 'material-ui/Tabs'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import PIDTab from "./PIDTab";
-// import ThemeManager from 'material-ui/lib/styles/theme-manager';
-// import ThemeDecorator from 'material-ui/lib/styles/theme-decorator';
-// import CustomTheme from '../theme';
+import {initWebSocket} from '../robot'
 
 const styles = {
   leftNav: {
@@ -25,6 +23,7 @@ class App extends Component {
       navTitle: 'Dashboard',
       value: 'a',
     }
+    initWebSocket(this.props);
   };
 
   componentWillUpdate = (nextProps, nextState) => {
@@ -72,6 +71,6 @@ function mapStateToProps(state) {
   return Object.assign({}, state, {});
 }
 
-App.defaultProps = {gameMode: 'Auto'};
+App.defaultProps = {tables: []};
 
 export default connect(mapStateToProps)(App);
