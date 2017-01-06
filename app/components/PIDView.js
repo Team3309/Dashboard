@@ -41,10 +41,13 @@ export default class PIDView extends Tab {
     return (
         <div onChange={this.handleChange}>
           <h2 style={styles.headline}>Drive</h2>
-          <PIDLineChart chartID={this.props.chartID + "-kP"} />
-          <PIDLineChart chartID={this.props.chartID + "-kI"} />
-          <PIDLineChart chartID={this.props.chartID + "-kD"} />
+          <PIDLineChart chartID={this.props.chartID + "-P"} />
+          <PIDLineChart chartID={this.props.chartID + "-I"} />
+          <PIDLineChart chartID={this.props.chartID + "-D"} />
           <PIDLineChart chartID={this.props.chartID + "-err"} />
+          kP<input type="text" id={this.props.chartID + "-kP"} value="0.0"></input>
+          kI<input type="text" id={this.props.chartID + "-kI"} value="0.0"></input>
+          kD<input type="text" id={this.props.chartID + "-kD"} value="0.0"></input>
           <button onClick={this.clearChart.bind(this)} >Click me</button>
         </div>
 
