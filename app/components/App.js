@@ -38,6 +38,7 @@ class App extends Component {
   };
 
   render() {
+    d3.selectAll("svg > *").remove();
     const childrenWithProps = React.Children.map(this.props.children, (child) => {
       var propsForChild = Object.assign({}, this.props);
       var objects = ["Hello", "PID1", "PID2", "PID3"];
@@ -47,7 +48,7 @@ class App extends Component {
         >
         {objects.map(function(object){
           return (<Tab label={object} value={object} key={object}>
-            <PIDView/>
+            <PIDView chartID={object}/>
           </Tab>);
         })}
 

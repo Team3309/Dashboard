@@ -1,5 +1,6 @@
 import React from 'react';
 import {Tabs, Tab} from 'material-ui/Tabs';
+import {Grid, Row, Col} from 'react-flexbox-grid/lib';
 
 const styles = {
   headline: {
@@ -10,34 +11,33 @@ const styles = {
   },
 };
 
-export default class PIDView extends React.Component {
-  lineData = [{
-    x: 1,
-    y: 5
-  }];
-  curX = 2;
-  constructor(props) {
-    super(props);
 
+
+export default class PIDLineChart extends React.Component {
+  curX = 2;
+  lineData = {x:0, y:1};
+  constructor(props, lineData) {
+    super(props);
+    console.log(this.props);
+    this.lineData = lineData;
     this.state = {
       value: 'a',
     };
+
   }
 
   handleChange = (value) => {
-
+    console.log("LOL");
   };
 
   render() {
+    console.log(this.props);
     this.curX++;
-    this.lineData.push({
-      x: this.curX,
-      y: 6
-    });
-    d3.selectAll("svg > *").remove();
-    var vis = d3.select('#visualisation'),
-    WIDTH = 1000,
-    HEIGHT = 500,
+
+
+    var vis = d3.select('#'+this.props.chartID),
+    WIDTH = 500,
+    HEIGHT = 250,
     MARGINS = {
       top: 20,
       right: 20,
@@ -89,9 +89,10 @@ export default class PIDView extends React.Component {
   .attr('stroke', 'blue')
   .attr('stroke-width', 2)
   .attr('fill', 'none');
-    return (
-      <svg id="visualisation" width="1000" height="500"></svg>
 
+
+    return (
+        <svg id={this.props.chartID} width="500" height="250"></svg>
     );
   }
 }

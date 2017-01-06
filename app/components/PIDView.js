@@ -14,7 +14,10 @@ const styles = {
   },
 };
 
+
+
 export default class PIDView extends Tab {
+
   constructor(props) {
     super(props);
     this.state = {
@@ -23,21 +26,31 @@ export default class PIDView extends Tab {
   }
 
   handleChange = (value) => {
+
     this.setState({
       value: value,
     });
   };
 
-  render() {
-    return (
+  clearChart() {
+    this.setState({lineData:[]});
+  }
 
-        <div>
+  render() {
+    console.log(this.props);
+    return (
+        <div onChange={this.handleChange}>
           <h2 style={styles.headline}>Drive</h2>
-          <p>
-            <PIDLineChart/>
-          </p>
+          <PIDLineChart chartID={this.props.chartID} lineData
+          <PIDLineChart chartID={this.props.chartID} lineData={}/>
+          <PIDLineChart chartID={this.props.chartID} lineData={}/>
+          <PIDLineChart chartID={this.props.chartID} lineData={}/>
+          <button onClick={this.clearChart.bind(this)} >Click me</button>
         </div>
 
     );
   }
+
+
+
 }
