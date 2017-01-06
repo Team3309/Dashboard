@@ -49,7 +49,7 @@ class App extends Component {
     d3.selectAll("svg > *").remove();
     const childrenWithProps = React.Children.map(this.props.children, (child) => {
       var propsForChild = Object.assign({}, this.props);
-      var objects = ["Hello", "PID1", "PID2", "PID3"];
+      var objects = ["Hello", "PID1", "PID2", "PID3", "PID4", "PID5"];
       return (  <Tabs
           value={this.state.value}
           onChange={this.handleChange}

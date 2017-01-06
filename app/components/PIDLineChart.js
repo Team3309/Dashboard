@@ -36,8 +36,8 @@ export default class PIDLineChart extends React.Component {
 
 
     var vis = d3.select('#'+this.props.chartID),
-    WIDTH = 500,
-    HEIGHT = 250,
+    WIDTH = 300,
+    HEIGHT = 150,
     MARGINS = {
       top: 20,
       right: 20,
@@ -92,7 +92,7 @@ export default class PIDLineChart extends React.Component {
 
 
     return (
-        <svg id={this.props.chartID} width="500" height="250"></svg>
+        <svg id={this.props.chartID} width="300" height="150"></svg>
     );
   }
 }
