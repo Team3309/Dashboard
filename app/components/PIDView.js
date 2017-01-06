@@ -1,8 +1,11 @@
 import React from 'react';
 import {Tabs, Tab} from 'material-ui/Tabs'
 import PIDLineChart from "./PIDLineChart"
+import {Grid, Row, Col} from "react-flexbox-grid"
 import * as d3 from "d3";
 ;
+
+
 
 
 const styles = {
@@ -12,6 +15,9 @@ const styles = {
     marginBottom: 12,
     fontWeight: 400,
   },
+  centerMe: {
+    textAlign:'center',
+  }
 };
 
 
@@ -40,14 +46,22 @@ export default class PIDView extends Tab {
     return (
         <div onChange={this.handleChange}>
           <h2 style={styles.headline}>Drive</h2>
-          <PIDLineChart chartID={this.props.chartID + "-P"} />
-          <PIDLineChart chartID={this.props.chartID + "-I"} />
-          <PIDLineChart chartID={this.props.chartID + "-D"} />
-          <PIDLineChart chartID={this.props.chartID + "-err"} />
-          kP<input type="text" id={this.props.chartID + "-kP"} value="0.0"></input>
-          kI<input type="text" id={this.props.chartID + "-kI"} value="0.0"></input>
-          kD<input type="text" id={this.props.chartID + "-kD"} value="0.0"></input>
-          <button onClick={this.clearChart.bind(this)} >Click me</button>
+          <Row>
+            <PIDLineChart chartID={this.props.chartID + "-P"} />
+            <PIDLineChart chartID={this.props.chartID + "-I"} />
+            <PIDLineChart chartID={this.props.chartID + "-D"} />
+            <PIDLineChart chartID={this.props.chartID + "-err"} />
+          </Row>
+          <Row lg={12} center="lg">
+            <Col style={styles.centerMe}>
+              kP<input type="text" id={this.props.chartID + "-kP"} value="0.0"></input>
+              kI<input type="text" id={this.props.chartID + "-kI"} value="0.0"></input>
+              kD<input type="text" id={this.props.chartID + "-kD"} value="0.0"></input>
+            </Col>
+          </Row>
+          <Col style={styles.centerMe}>
+          <button  onClick={this.clearChart.bind(this)} >Click me</button>
+          </Col>
         </div>
 
     );
