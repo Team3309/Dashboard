@@ -42,17 +42,24 @@ export default class PIDView extends Tab {
     this.setState({lineData:[]});
   }
 
+
+
   render() {
+
+
     return (
         <div onChange={this.handleChange}>
           <h2 style={styles.headline}>Drive</h2>
           <Row>
-            <PIDLineChart chartID={this.props.chartID + "-P"} />
+            {this.props.tableData.map(function(key, value) {
+              return (<PIDLineChart chartID={key} lineData={value}/>)
+            })
+            }
             <PIDLineChart chartID={this.props.chartID + "-I"} />
             <PIDLineChart chartID={this.props.chartID + "-D"} />
             <PIDLineChart chartID={this.props.chartID + "-err"} />
           </Row>
-          <Row lg={12} center="lg">
+          <Row>
             <Col style={styles.centerMe}>
               kP<input type="text" id={this.props.chartID + "-kP"} value="0.0"></input>
               kI<input type="text" id={this.props.chartID + "-kI"} value="0.0"></input>

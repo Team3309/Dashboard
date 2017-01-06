@@ -71,13 +71,14 @@ class App extends Component {
     const childrenWithProps = React.Children.map(this.props.children, (child) => {
       var propsForChild = Object.assign({}, this.props);
       var objects = ["Hello", "PID1", "PID2", "PID3", "PID4", "PID5"];
+      var tables = this.state.tables;
       return (  <Tabs
           value={this.state.value}
           onChange={this.handleChange}
         >
         {objects.map(function(object){
           return (<Tab label={object} value={object} key={object}>
-            <PIDView chartID={object}/>
+            <PIDView chartID={object} tableData = {tables[0]}/>
           </Tab>);
         })}
 
