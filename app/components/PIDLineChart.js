@@ -18,7 +18,7 @@ export default class PIDLineChart extends React.Component {
   lineData = {x:0, y:1};
   constructor(props, lineData) {
     super(props);
-    console.log(this.props);
+    // console.log(this.props);
     this.lineData = lineData;
     this.state = {
       value: 'a',
@@ -31,7 +31,6 @@ export default class PIDLineChart extends React.Component {
   };
 
   render() {
-    console.log(this.props);
     this.curX++;
 
 

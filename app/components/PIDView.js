@@ -37,7 +37,6 @@ export default class PIDView extends Tab {
   }
 
   render() {
-    console.log(this.props);
     return (
         <div onChange={this.handleChange}>
           <h2 style={styles.headline}>Drive</h2>
