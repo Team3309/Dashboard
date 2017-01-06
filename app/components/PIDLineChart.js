@@ -16,10 +16,17 @@ const styles = {
 export default class PIDLineChart extends React.Component {
   curX = 2;
   lineData = {x:0, y:1};
+  parsedData = {};
   constructor(props, lineData) {
     super(props);
-    // console.log(this.props);
+    // console.log(this.props);\
+
     this.lineData = lineData;
+
+    for( var i = 0; i < lineData.length; i++) {
+      parsedData.push({x:i, y:lineData[i]})
+    }
+
     this.state = {
       value: 'a',
     };
