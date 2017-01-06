@@ -6,6 +6,7 @@ import {Tabs, Tab} from 'material-ui/Tabs'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import PIDView from "./PIDView";
 import {initWebSocket} from '../robot'
+import update from 'react-addons-update';
 
 const styles = {
   leftNav: {
@@ -13,17 +14,17 @@ const styles = {
   }
 };
 
-// @ThemeDecorator(ThemeManager.getMuiTheme(CustomTheme))
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      tables: [],
       navOpen: false,
       navTitle: 'Dashboard',
       value: 'a'
     };
-    initWebSocket(this.handleOpen, this.handleClose);
+    initWebSocket(this.updateState, this.handleOpen, this.handleClose);
   };
 
   handleOpen = () => {
@@ -34,9 +35,29 @@ class App extends Component {
     this.setState({socketConnected : false});
   };
 
+  updateState = (table, key, value) => {
+    // console.log("table: " + table, "key: " + key, "value: " + value);
+    console.log(this.state.tables);
+
+    var newTables = this.state.tables;
+
+    if (!newTables[table]) {
+      newTables[table] = {};
+    }
+
+    if (!newTables[table][key]) {
+      newTables[table][key] = [];
+    }
+
+    newTables[table][key].push(value);
+
+    this.setState({
+      tables: newTables
+    });
+  };
+
   componentWillUpdate = (nextProps, nextState) => {
     console.log(nextProps.location.pathname);
-    nextState.inScoutMode = nextProps.location.pathname.indexOf('scout') > -1;
   };
 
   handleChange = (value) => {
@@ -82,7 +103,6 @@ function mapStateToProps(state) {
 }
 
 App.defaultProps = {
-  tables: [],
   socketConnected: false
 };
 

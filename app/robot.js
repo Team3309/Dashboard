@@ -1,7 +1,6 @@
 let webSocket = null;
-let props = null;
 
-export function initWebSocket(handleOpen, handleClose) {
+export function initWebSocket(updateState, handleOpen, handleClose) {
   console.log("init");
   if (webSocket != null) {
     // already working
@@ -9,7 +8,7 @@ export function initWebSocket(handleOpen, handleClose) {
   }
   webSocket = new WebSocket("ws://localhost:8000");
   webSocket.onmessage = function(evt) {
-    handlePayloadFromWebSocket(evt.data);
+    handlePayloadFromWebSocket(updateState, evt.data);
   };
   webSocket.onopen = function() {
     handleOpen();
@@ -21,26 +20,15 @@ export function initWebSocket(handleOpen, handleClose) {
   };
 }
 
-function handlePayloadFromWebSocket(payloadString) {
-  var payloadJson = JSON.parse(payloadString);
-  addOrUpdateValue(payloadJson.table, payloadJson.key, payloadJson.value);
-  console.log(props.tables);
-}
-
-function addOrUpdateValue(tableName, key, value) {
-  var table = getOrCreateTable(tableName);
-  setOrCreateElement(table, key, value);
-}
-
-function getOrCreateTable(tableName) {
-  var table = props.tables[tableName];
-  if (table != null) {
-    return table;
+function sendValueUpdate(tableName, key, value, type) {
+  if (webSocket == null || webSocket.readyState != WebSocket.OPEN) {
+    console.error("Can't send update to " + tableName + ", " + key);
+    return;
   }
-  props.tables[tableName] = [];
-  return props.tables[tableName];
+  webSocket.send(JSON.stringify({"table": tableName, "key": key, "value": value, type: type}));
 }
 
-function setOrCreateElement(table, key, value) {
-  table[key] = value;
+function handlePayloadFromWebSocket(updateState, payloadString) {
+  var payloadJson = JSON.parse(payloadString);
+  updateState(payloadJson.table, payloadJson.key, payloadJson.value);
 }
