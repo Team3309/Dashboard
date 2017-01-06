@@ -21,9 +21,17 @@ class App extends Component {
     this.state = {
       navOpen: false,
       navTitle: 'Dashboard',
-      value: 'a',
-    }
-    initWebSocket(this.props);
+      value: 'a'
+    };
+    initWebSocket(this.handleOpen, this.handleClose);
+  };
+
+  handleOpen = () => {
+    this.setState({socketConnected : true});
+  };
+
+  handleClose = () => {
+    this.setState({socketConnected : false});
   };
 
   componentWillUpdate = (nextProps, nextState) => {
@@ -58,6 +66,7 @@ class App extends Component {
       <MuiThemeProvider>
         <StyleRoot>
           <div style={{width: '100%', height: '100%'}}>
+            {this.state.socketConnected ? "Connected" : "Disconnected"}
             {childrenWithProps}
           </div>
         </StyleRoot>
@@ -71,6 +80,9 @@ function mapStateToProps(state) {
   return Object.assign({}, state, {});
 }
 
-App.defaultProps = {tables: []};
+App.defaultProps = {
+  tables: [],
+  socketConnected: false
+};
 
 export default connect(mapStateToProps)(App);
